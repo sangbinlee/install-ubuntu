@@ -240,6 +240,119 @@
     tomcat        latest    7ba61facbe26   9 days ago     425MB
     hello-world   latest    9c7a54a9a43c   3 months ago   13.3kB
     tomcat        7         9dfd74e6bc2f   2 years ago    533MB
+
+
+# tomcat Dockerfile
+
+    
+    
+    sangbinlee9@master:/etc$ ll loca*
+    -rw-r--r-- 1 root root 2996 Jul  6  2022 locale.alias
+    -rw-r--r-- 1 root root 9456 Aug  4 13:03 locale.gen
+    lrwxrwxrwx 1 root root   27 Aug  4 12:58 localtime -> /usr/share/zoneinfo/Etc/UTC
+    sangbinlee9@master:/etc$ pwd
+    /etc
+    sangbinlee9@master:/etc$
+    
+    
+
+    
+    
+    FROM tomcat:latest
+    MAINTAINER DHPark<rharnr777@gmail.com>
+    
+    EXPOSE 8080
+    
+    RUN ["rm", "/etc/localtime"]
+    RUN ["ln", "-sf", "/usr/share/zoneinfo/Asia/Seoul", "/etc/localtime"]
+    
+    COPY setenv.sh /usr/local/tomcat/bin/
+    COPY OJDBC-Full /usr/local/tomcat/lib/
+    
+    # jdbc:oracle:thin:@192.168.0.8:1521/MY_PDB.oracledb.my.local
+    # jdbc:oracle:thin:@192.168.0.8:1521/ORCLCDB
+    
+
+
+
+    
+    
+    sangbinlee9@master:~$ ll
+    total 6880
+    drwxr-x--- 6 sangbinlee9 sangbinlee9    4096 Aug  4 18:31 ./
+    drwxr-xr-x 3 root        root           4096 Aug  4 13:02 ../
+    -rw------- 1 sangbinlee9 sangbinlee9    1675 Aug  4 16:19 .bash_history
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9     220 Jan  6  2022 .bash_logout
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9    3771 Jan  6  2022 .bashrc
+    drwx------ 2 sangbinlee9 sangbinlee9    4096 Aug  4 13:34 .cache/
+    drwx------ 3 sangbinlee9 sangbinlee9    4096 Aug  4 16:32 .docker/
+    -rw-rw-r-- 1 sangbinlee9 sangbinlee9     496 Aug  4 18:24 Dockerfile
+    -rw-rw-r-- 1 sangbinlee9 sangbinlee9 6971601 Aug  4 18:31 ojdbc11.jar  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    drwxrwxr-x 2 sangbinlee9 sangbinlee9    4096 Aug  4 18:30 OJDBC-Full/   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9     807 Jan  6  2022 .profile
+    -rw-rw-r-- 1 sangbinlee9 sangbinlee9    8618 Aug  4 16:35 SampleWebApp.war
+    -rw-rw-r-- 1 sangbinlee9 sangbinlee9      94 Aug  4 18:28 setenv.sh
+    drwx------ 2 sangbinlee9 sangbinlee9    4096 Aug  4 13:03 .ssh/
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9       0 Aug  4 13:48 .sudo_as_admin_successful
+    -rw------- 1 sangbinlee9 sangbinlee9    2533 Aug  4 18:28 .viminfo
+    -rw------- 1 sangbinlee9 sangbinlee9     156 Aug  4 16:43 .Xauthority
+    sangbinlee9@master:~$ mv ojdbc11.jar OJDBC-Full/
+    sangbinlee9@master:~$ ll
+    total 68
+    drwxr-x--- 6 sangbinlee9 sangbinlee9 4096 Aug  4 18:32 ./
+    drwxr-xr-x 3 root        root        4096 Aug  4 13:02 ../
+    -rw------- 1 sangbinlee9 sangbinlee9 1675 Aug  4 16:19 .bash_history
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9  220 Jan  6  2022 .bash_logout
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9 3771 Jan  6  2022 .bashrc
+    drwx------ 2 sangbinlee9 sangbinlee9 4096 Aug  4 13:34 .cache/
+    drwx------ 3 sangbinlee9 sangbinlee9 4096 Aug  4 16:32 .docker/
+    -rw-rw-r-- 1 sangbinlee9 sangbinlee9  496 Aug  4 18:24 Dockerfile
+    drwxrwxr-x 2 sangbinlee9 sangbinlee9 4096 Aug  4 18:32 OJDBC-Full/
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9  807 Jan  6  2022 .profile
+    -rw-rw-r-- 1 sangbinlee9 sangbinlee9 8618 Aug  4 16:35 SampleWebApp.war
+    -rw-rw-r-- 1 sangbinlee9 sangbinlee9   94 Aug  4 18:28 setenv.sh
+    drwx------ 2 sangbinlee9 sangbinlee9 4096 Aug  4 13:03 .ssh/
+    -rw-r--r-- 1 sangbinlee9 sangbinlee9    0 Aug  4 13:48 .sudo_as_admin_successful
+    -rw------- 1 sangbinlee9 sangbinlee9 2533 Aug  4 18:28 .viminfo
+    -rw------- 1 sangbinlee9 sangbinlee9  156 Aug  4 16:43 .Xauthority
+    sangbinlee9@master:~$ docker build -t mytomcat .
+    ERROR: permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/_ping": dial unix /var/run/docker.sock: connect: permission denied
+    sangbinlee9@master:~$ sudo docker build -t mytomcat .
+    [sudo] password for sangbinlee9:
+    [+] Building 1.4s (10/10) FINISHED                                                                                                                                                             docker:default
+     => [internal] load .dockerignore                                                                                                                                                                        0.0s
+     => => transferring context: 2B                                                                                                                                                                          0.0s
+     => [internal] load build definition from Dockerfile                                                                                                                                                     0.0s
+     => => transferring dockerfile: 535B                                                                                                                                                                     0.0s
+     => [internal] load metadata for docker.io/library/tomcat:latest                                                                                                                                         0.0s
+     => [1/5] FROM docker.io/library/tomcat:latest                                                                                                                                                           0.3s
+     => [internal] load build context                                                                                                                                                                        0.2s
+     => => transferring context: 6.97MB                                                                                                                                                                      0.0s
+     => [2/5] RUN ["rm", "/etc/localtime"]                                                                                                                                                                   0.3s
+     => [3/5] RUN ["ln", "-sf", "/usr/share/zoneinfo/Asia/Seoul", "/etc/localtime"]                                                                                                                          0.4s
+     => [4/5] COPY setenv.sh /usr/local/tomcat/bin/                                                                                                                                                          0.1s
+     => [5/5] COPY OJDBC-Full /usr/local/tomcat/lib/                                                                                                                                                         0.1s
+     => exporting to image                                                                                                                                                                                   0.1s
+     => => exporting layers                                                                                                                                                                                  0.1s
+     => => writing image sha256:058bec07245cbb8feb57e3fc80467f9acc7536d55290917584a2ffcc7a84bb87                                                                                                             0.0s
+     => => naming to docker.io/library/mytomcat                                                                                                                                                              0.0s
+    sangbinlee9@master:~$ sudo docker images
+    REPOSITORY                     TAG             IMAGE ID       CREATED          SIZE
+    mytomcat                       latest          058bec07245c   15 seconds ago   432MB
+    tomcat                         8               511ab3e2b780   9 days ago       426MB
+    tomcat                         latest          7ba61facbe26   9 days ago       425MB
+    hello-world                    latest          9c7a54a9a43c   3 months ago     13.3kB
+    tomcat                         7               9dfd74e6bc2f   2 years ago      533MB
+    wvbirder/database-enterprise   12.2.0.1-slim   27c9559d36ec   5 years ago      2.08GB
+    sangbinlee9@master:~$ l
+
+
+
+
+
+
+
+
     
 # Running a Docker Container
 
@@ -668,6 +781,45 @@
     
 # SQL Developer 23.1
     https://www.oracle.com/database/sqldeveloper/technologies/download/
+
+
+
+# docker-compose.yml
+
+      sangbinlee9@master:~$ vi docker-compose.yml
+      version: '3'
+      
+      services:
+          oracle_server:
+              container_name: oracle-db-compose
+              image: 'wvbirder/database-enterprise:12.2.0.1-slim'
+              ports:
+                - "1521:1521"
+              volumes:
+                - /home/sangbinlee9/dockerdir:/ORCL
+              environment:
+                - DB_SID=ORCLCDB
+                - DB_PDB=ORCLPDB1
+                - DB_DOMAIN=localdomain
+                - TZ=Asia/Seoul
+      
+          tomcat_server:
+            container_name: mytomcat
+            image: 'mytomcat'
+            ports:
+              - "8080:8080"
+            volumes:
+              - /home/sangbinlee9/dockercompose/tomcat:/usr/local/tomcat/webapps
+
+
+
+
+
+
+
+
+
+
 
 # data import , restore
 
