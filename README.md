@@ -55,6 +55,9 @@
 
 
 # check java version
+
+
+
     
     sangbinlee9@master:~$ java -version
     openjdk version "1.8.0_382"
@@ -161,6 +164,13 @@
 
 # tomcat
 
+
+# ufw
+
+    sangbinlee9@master:~$ sudo ufw enable
+    sangbinlee9@master:~$ sudo ufw allow 22
+    sangbinlee9@master:~$ sudo ufw allow 8080
+    sangbinlee9@master:~$ sudo ufw status
 
 
 
