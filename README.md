@@ -95,6 +95,34 @@
 
 
 
+# reboot now
+
+
+# history
+
+  
+  sangbinlee9@master:~$ history
+      1  java -version
+      2  sudo apt install openjdk-8-jre-headless
+      3  java -version
+      4  docker -version
+      5  uname -a
+      6  lsb_release -a
+      7  sudo apt-get update
+      8  sudo apt-get install ca-certificates curl gnupg
+      9  sudo install -m 0755 -d /etc/apt/keyrings
+     10  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+     11  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+     12  echo   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+     13    "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+     14  sudo apt-get update
+     15  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+     16  sudo docker run hello-world
+     17  reboot now
+     18  sudo reboot now
+     19  history
+     20  sudo docker run hello-world
+     21  history
 
 
 
