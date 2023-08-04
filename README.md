@@ -16,7 +16,7 @@
 
     https://ubuntu.com/tutorials/install-ubuntu-server#3-boot-from-install-media
 
-
+    https://ubuntu.com/server/docs/install/step-by-step
 
 # check Ubuntu Server version
   
