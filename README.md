@@ -6,7 +6,7 @@
   
     https://rufus.ie/ko/
 
-    ![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/0637332c-107d-43f7-9eb3-d374c447ef1b)
+  ![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/0637332c-107d-43f7-9eb3-d374c447ef1b)
 
 # Create a bootable USB stick with Rufus on Windows
   
