@@ -1,5 +1,20 @@
-# install-ubuntu with iso file
-install-ubuntu
+# download ubuntu server iso file
+
+  https://ubuntu.com/download/server
+
+
+
+# download rufus 
+
+  https://rufus.ie/ko/
+
+
+![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/0637332c-107d-43f7-9eb3-d374c447ef1b)
+
+
+
+
+
 
 
 # write usb with iso file
