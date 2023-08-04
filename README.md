@@ -606,7 +606,7 @@
     
     
     
-    ![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/a9f92652-f350-4db7-a2a7-5205099edacd)
+![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/a9f92652-f350-4db7-a2a7-5205099edacd)
 
 
 
