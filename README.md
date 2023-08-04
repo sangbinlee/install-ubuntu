@@ -184,6 +184,64 @@
     CONTAINER ID   IMAGE      COMMAND             CREATED         STATUS         PORTS                                       NAMES
     3a3680399a00   tomcat:8   "catalina.sh run"   9 minutes ago   Up 9 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat-test
     
+
+    
+    
+    sangbinlee9@master:~$ sudo docker search tomcat
+    NAME                          DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+    tomcat                        Apache Tomcat is an open source implementati…   3573      [OK]
+    tomee                         Apache TomEE is an all-Apache Java EE certif…   109       [OK]
+    bitnami/tomcat                Bitnami Tomcat Docker Image                     49                   [OK]
+    bitnamicharts/tomcat                                                          0
+    secoresearch/tomcat-varnish   Tomcat and Varnish 5.0                          0                    [OK]
+    vulhub/tomcat                                                                 0
+    islandora/tomcat                                                              0
+    wnprcehr/tomcat                                                               0
+    hivdb/tomcat-with-nucamino                                                    0
+    jumpserver/tomcat                                                             0
+    sismics/tomcat                Apache Tomcat Servlet Container                 1
+    eclipse/rdf4j-workbench       Dockerfile for Eclipse RDF4J Server and Work…   6
+    semoss/docker-tomcat          Tomcat, Java, Maven, and Git on top of debian   0                    [OK]
+    eclipse/hadoop-dev            Ubuntu 14.04, Maven 3.3.9, JDK8, Tomcat 8       0                    [OK]
+    gbif/ipt                      The GBIF Integrated Publishing Toolkit (IPT)…   0
+    dhis2/base-dev                Images in this repository contains DHIS2 WAR…   0
+    eclipse/alpine_jdk8           Based on Alpine 3.3. JDK 1.8, Maven 3.3.9, T…   1                    [OK]
+    misolims/miso-base            MySQL 5.7 Database and Tomcat 8 Server neede…   0
+    dhis2/base                    Images in this repository contains DHIS2 WAR…   0
+    jelastic/tomcat               An image of the Tomcat Java application serv…   4
+    cfje/tomcat-resource          Tomcat Concourse Resource                       2
+    rightctrl/tomcat              CentOS , Oracle Java, tomcat application ssl…   7                    [OK]
+    amd64/tomcat                  Apache Tomcat is an open source implementati…   6
+    arm64v8/tomcat                Apache Tomcat is an open source implementati…   8
+    softwareplant/tomcat          Tomcat images for jira-cloud testing            0                    [OK]
+
+    
+    
+    
+    sangbinlee9@master:~$ sudo docker pull tomcat
+    Using default tag: latest
+    latest: Pulling from library/tomcat
+    9d19ee268e0d: Already exists
+    f2b566cb887b: Already exists
+    2699dbfb6757: Already exists
+    38ab1613eab3: Already exists
+    1d4c657a9280: Already exists
+    9f132165bd73: Pull complete
+    e647b8ebf378: Pull complete
+    Digest: sha256:7af5900fcc06062d767a80c834c0933be355727376faad61ceabfea91fa2b4f1
+    Status: Downloaded newer image for tomcat:latest
+    docker.io/library/tomcat:latest
+    sangbinlee9@master:~$
+
+
+    sangbinlee9@master:~$ sudo docker images
+    REPOSITORY    TAG       IMAGE ID       CREATED        SIZE
+    tomcat        8         511ab3e2b780   9 days ago     426MB
+    tomcat        latest    7ba61facbe26   9 days ago     425MB
+    hello-world   latest    9c7a54a9a43c   3 months ago   13.3kB
+    tomcat        7         9dfd74e6bc2f   2 years ago    533MB
+    
+
     
 
 # ufw
