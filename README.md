@@ -163,7 +163,28 @@
 
 
 # tomcat
+    
+    sangbinlee9@master:~$ sudo docker run -d --name="tomcat-test" -p 8080:8080 tomcat:8
+    Unable to find image 'tomcat:8' locally
+    8: Pulling from library/tomcat
+    9d19ee268e0d: Pull complete
+    f2b566cb887b: Pull complete
+    2699dbfb6757: Pull complete
+    38ab1613eab3: Pull complete
+    1d4c657a9280: Pull complete
+    0a66037568bd: Pull complete
+    75da0ea6a69f: Pull complete
+    Digest: sha256:c4f7458a0b96c12b86acabd29f61cff9bc13f14cd61b3841a41ad40fd4c3de4a
+    Status: Downloaded newer image for tomcat:8
+    3a3680399a002933d6affff7d4af548bd900e8022fe600b189692f4001176e38
 
+    
+        
+    sangbinlee9@master:~$ sudo docker ps
+    CONTAINER ID   IMAGE      COMMAND             CREATED         STATUS         PORTS                                       NAMES
+    3a3680399a00   tomcat:8   "catalina.sh run"   9 minutes ago   Up 9 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat-test
+    
+    
 
 # ufw
 
