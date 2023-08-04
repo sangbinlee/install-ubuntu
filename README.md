@@ -9,7 +9,7 @@
   https://rufus.ie/ko/
 
 
-![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/0637332c-107d-43f7-9eb3-d374c447ef1b)
+  ![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/0637332c-107d-43f7-9eb3-d374c447ef1b)
 
 
 
@@ -18,7 +18,10 @@
   
 
 
-# and then installing system - kernel, swap, grub, 
+# Install Ubuntu Server
+  https://ubuntu.com/tutorials/install-ubuntu-server#3-boot-from-install-media
+
+
 
 # reboot now when installing is completed
 
