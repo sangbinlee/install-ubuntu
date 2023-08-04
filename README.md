@@ -162,7 +162,7 @@
 
 
 
-# tomcat
+# tomcat  - Working with Docker Images
     
     sangbinlee9@master:~$ sudo docker run -d --name="tomcat-test" -p 8080:8080 tomcat:8
     Unable to find image 'tomcat:8' locally
@@ -250,6 +250,8 @@
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
     
         
+     
+    
     
     sangbinlee9@master:~$ sudo docker ps
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
@@ -259,13 +261,35 @@
     sangbinlee9@master:~$ sudo docker ps -l
     CONTAINER ID   IMAGE           COMMAND             CREATED         STATUS                        PORTS     NAMES
     a6d5b87e4026   tomcat:latest   "catalina.sh run"   3 minutes ago   Exited (130) 20 seconds ago             beautiful_varahamihira
+    sangbinlee9@master:~$ sudo docker start a6d5b87e4026
+    a6d5b87e4026
+    sangbinlee9@master:~$ sudo docker ps -l
+    CONTAINER ID   IMAGE           COMMAND             CREATED         STATUS         PORTS      NAMES
+    a6d5b87e4026   tomcat:latest   "catalina.sh run"   5 minutes ago   Up 4 seconds   8080/tcp   beautiful_varahamihira
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE           COMMAND             CREATED         STATUS         PORTS      NAMES
+    a6d5b87e4026   tomcat:latest   "catalina.sh run"   5 minutes ago   Up 9 seconds   8080/tcp   beautiful_varahamihira
+    sangbinlee9@master:~$
     
     
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE           COMMAND             CREATED          STATUS         PORTS      NAMES
+    a6d5b87e4026   tomcat:latest   "catalina.sh run"   13 minutes ago   Up 8 minutes   8080/tcp   beautiful_varahamihira
+    sangbinlee9@master:~$ sudo docker stop a6d5b87e4026
+    a6d5b87e4026
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE           COMMAND             CREATED          STATUS                       PORTS     NAMES
+    a6d5b87e4026   tomcat:latest   "catalina.sh run"   13 minutes ago   Exited (143) 2 seconds ago             beautiful_varahamihira
 
-
-
-
-
+    
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE           COMMAND             CREATED          STATUS                            PORTS     NAMES
+    a6d5b87e4026   tomcat:latest   "catalina.sh run"   14 minutes ago   Exited (143) About a minute ago             beautiful_varahamihira
+    sangbinlee9@master:~$ sudo docker rm a6d5b87e4026
+    a6d5b87e4026
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+    sangbinlee9@master:~$
 
 
 # ufw
@@ -285,8 +309,356 @@
 
 # oracle
 
+    docker pull wvbirder/database-enterprise:12.2.0.1-slim
 
 
+
+
+    
+    sangbinlee9@master:~$ sudo docker pull wvbirder/database-enterprise:12.2.0.1-slim
+    12.2.0.1-slim: Pulling from wvbirder/database-enterprise
+    f07cd347d7cc: Pull complete
+    e6d45c5d2f56: Pull complete
+    0c3e3e3a81c6: Pull complete
+    522e6a16038b: Pull complete
+    7f4b317ad325: Pull complete
+    Digest: sha256:25b0ec7cc3987f86b1e754fc214e7f06761c57bc11910d4be87b0d42ee12d254
+    Status: Downloaded newer image for wvbirder/database-enterprise:12.2.0.1-slim
+    docker.io/wvbirder/database-enterprise:12.2.0.1-slim
+    sangbinlee9@master:~$ sudo docker images
+    REPOSITORY                     TAG             IMAGE ID       CREATED        SIZE
+    tomcat                         8               511ab3e2b780   9 days ago     426MB
+    tomcat                         latest          7ba61facbe26   9 days ago     425MB
+    hello-world                    latest          9c7a54a9a43c   3 months ago   13.3kB
+    tomcat                         7               9dfd74e6bc2f   2 years ago    533MB
+    wvbirder/database-enterprise   12.2.0.1-slim   27c9559d36ec   5 years ago    2.08GB
+    
+    
+
+
+
+
+
+
+
+    docker run -dit --name local_db -p 1521:1521 wvbirder/database-enterprise:12.2.0.1-slim
+    
+    sangbinlee9@master:~$ sudo docker run -dit --name local_db -p 1521:1521 wvbirder/database-enterprise:12.2.0.1-slim
+    776e2c6bf260447a48a4a4bbdaf3a6be71b70d6ca732ad6b0dc55d42dd942ac7
+    sangbinlee9@master:~$
+
+
+
+    docker ps -a (정상적으로 프로세스가 떳는지 확인)
+
+    
+    sangbinlee9@master:~$ sudo docker ps
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED          STATUS                             PORTS                                                 NAMES
+    776e2c6bf260   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   49 seconds ago   Up 48 seconds (health: starting)   0.0.0.0:1521->1521/tcp, :::1521->1521/tcp, 5500/tcp   local_db
+    
+
+
+
+    // Docker 실행 로그를 확인하면서 완료될때 까지 기다린다.
+    docker logs -f local_db
+    
+    
+    sangbinlee9@master:~$ sudo docker logs -f local_db
+    Setup Oracle Database
+    Oracle Database 12.2.0.1 Setup
+    Fri Aug 4 17:31:51 UTC 2023
+    
+    Check parameters ......
+    log file is : /home/oracle/setup/log/paramChk.log
+    paramChk.sh is done at 0 sec
+    
+    untar DB bits ......
+    log file is : /home/oracle/setup/log/untarDB.log
+    untarDB.sh is done at 18 sec
+    
+    config DB ......
+    log file is : /home/oracle/setup/log/configDB.log
+    Fri Aug 4 17:32:09 UTC 2023
+    Start Docker DB configuration
+    Call configDBora.sh to configure database
+    Fri Aug 4 17:32:09 UTC 2023
+    Configure DB as oracle user
+    Setup Database directories ...
+    
+    SQL*Plus: Release 12.2.0.1.0 Production on Fri Aug 4 17:32:09 2023
+    
+    Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+    
+    Connected to an idle instance.
+    
+    SQL>
+    File created.
+    
+    SQL> ORACLE instance started.
+    
+    Total System Global Area 1342177280 bytes
+    Fixed Size                  8792536 bytes
+    Variable Size             352323112 bytes
+    Database Buffers          973078528 bytes
+    Redo Buffers                7983104 bytes
+    Database mounted.
+    Database opened.
+    SQL>
+    Database altered.
+    
+    SQL>
+    NAME                                 TYPE        VALUE
+    ------------------------------------ ----------- ------------------------------
+    spfile                               string      /u01/app/oracle/product/12.2.0
+                                                     /dbhome_1/dbs/spfileORCLCDB.or
+                                                     a
+    SQL>
+    NAME                                 TYPE        VALUE
+    ------------------------------------ ----------- ------------------------------
+    encrypt_new_tablespaces              string      CLOUD_ONLY
+    SQL>
+    User altered.
+    
+    SQL>
+    User altered.
+    
+    SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+    update password
+    
+    Enter password for SYS:
+    create pdb : ORCLPDB1
+    
+    SQL*Plus: Release 12.2.0.1.0 Production on Fri Aug 4 17:32:20 2023
+    
+    Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+    
+    
+    Connected to:
+    Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+    
+    SQL>   2    3    4    5
+    Pluggable database created.
+    
+    SQL>
+    Pluggable database altered.
+    
+    SQL>
+    Pluggable database altered.
+    
+    SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+    Reset Database parameters
+    
+    SQL*Plus: Release 12.2.0.1.0 Production on Fri Aug 4 17:32:34 2023
+    
+    Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+    
+    
+    Connected to:
+    Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+    
+    SQL>
+    System altered.
+    
+    SQL> Disconnected from Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+    
+    LSNRCTL for Linux: Version 12.2.0.1.0 - Production on 04-AUG-2023 17:32:34
+    
+    Copyright (c) 1991, 2016, Oracle.  All rights reserved.
+    
+    Starting /u01/app/oracle/product/12.2.0/dbhome_1/bin/tnslsnr: please wait...
+    
+    TNSLSNR for Linux: Version 12.2.0.1.0 - Production
+    System parameter file is /u01/app/oracle/product/12.2.0/dbhome_1/admin/ORCLCDB/listener.ora
+    Log messages written to /u01/app/oracle/diag/tnslsnr/776e2c6bf260/listener/alert/log.xml
+    Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
+    Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+    
+    Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=0.0.0.0)(PORT=1521)))
+    STATUS of the LISTENER
+    ------------------------
+    Alias                     LISTENER
+    Version                   TNSLSNR for Linux: Version 12.2.0.1.0 - Production
+    Start Date                04-AUG-2023 17:32:34
+    Uptime                    0 days 0 hr. 0 min. 0 sec
+    Trace Level               off
+    Security                  ON: Local OS Authentication
+    SNMP                      OFF
+    Listener Parameter File   /u01/app/oracle/product/12.2.0/dbhome_1/admin/ORCLCDB/listener.ora
+    Listener Log File         /u01/app/oracle/diag/tnslsnr/776e2c6bf260/listener/alert/log.xml
+    Listening Endpoints Summary...
+      (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=0.0.0.0)(PORT=1521)))
+      (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))
+    The listener supports no services
+    The command completed successfully
+    
+    DONE!
+    Remove password info
+    Docker DB configuration is complete !
+    configDB.sh is done at 43 sec
+    
+    Done ! The database is ready for use .
+    # ===========================================================================
+    # == Add below entries to your tnsnames.ora to access this database server ==
+    # ====================== from external host =================================
+    ORCLCDB=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<ip-address>)(PORT=<port>))
+        (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLCDB.localdomain)))
+    ORCLPDB1=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<ip-address>)(PORT=<port>))
+        (CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ORCLPDB1.localdomain)))
+    #
+    #ip-address : IP address of the host where the container is running.
+    #port       : Host Port that is mapped to the port 1521 of the container.
+    #
+    # The mapped port can be obtained from running "docker port <container-id>"
+    # ===========================================================================
+    ORCLPDB1(3):Database Characterset for ORCLPDB1 is WE8DEC
+    ORCLPDB1(3):Opatch validation is skipped for PDB ORCLPDB1 (con_id=0)
+    2023-08-04T17:32:34.398072+00:00
+    ORCLPDB1(3):Opening pdb with no Resource Manager plan active
+    Pluggable database ORCLPDB1 opened read write
+    Completed:     alter pluggable database ORCLPDB1 open
+        alter pluggable database all save state
+    Completed:     alter pluggable database all save state
+    2023-08-04T17:32:34.545695+00:00
+    ALTER SYSTEM SET encrypt_new_tablespaces='DDL' SCOPE=BOTH;
+    2023-08-04T17:32:49.054076+00:00
+    Thread 1 advanced to log sequence 15 (LGWR switch)
+      Current log# 3 seq# 15 mem# 0: /u04/app/oracle/redo/redo03.dbf
+    2023-08-04T17:33:21.144619+00:00
+    TABLE SYS.WRP$_REPORTS: ADDED INTERVAL PARTITION SYS_P1427 (4964) VALUES LESS THAN (TO_DATE(' 2023-08-05 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+    TABLE SYS.WRP$_REPORTS_DETAILS: ADDED INTERVAL PARTITION SYS_P1428 (4964) VALUES LESS THAN (TO_DATE(' 2023-08-05 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+    TABLE SYS.WRP$_REPORTS_TIME_BANDS: ADDED INTERVAL PARTITION SYS_P1431 (4963) VALUES LESS THAN (TO_DATE(' 2023-08-04 01:00:00', 'SYYYY-MM-DD HH24:MI:SS', 'NLS_CALENDAR=GREGORIAN'))
+    
+
+
+
+
+
+ 
+
+
+
+    docker exec -it local_db bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
+    
+    
+    sangbinlee9@master:~$ sudo  docker exec -it local_db bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
+    [sudo] password for sangbinlee9:
+    
+    SQL*Plus: Release 12.2.0.1.0 Production on Fri Aug 4 17:36:29 2023
+    
+    Copyright (c) 1982, 2016, Oracle.  All rights reserved.
+    
+    
+    Connected to:
+    Oracle Database 12c Enterprise Edition Release 12.2.0.1.0 - 64bit Production
+    
+    SQL> alter session set "_ORACLE_SCRIPT"=true;
+    
+    Session altered.
+    
+    SQL> create user test identified by test;
+    
+    User created.
+    
+    SQL> grant connect, resource, dba to test;
+    
+    Grant succeeded.
+    
+    SQL> update sys.props$ set value$='KOREAN_KOREA.UTF8' where name='NLS_LANGUAGE';
+    
+    1 row updated.
+    
+    SQL> update sys.props$ set value$='UTF8' where name='NLS_CHARACTERSET';
+    
+    1 row updated.
+    
+    SQL> update sys.props$ set value$='UTF8' where name='NLS_NCHAR_CHARACTERSET';
+    
+    1 row updated.
+    
+    SQL> commit;
+    
+    Commit complete.
+     
+    SQL> shutdown immediate;
+    Database closed.
+    Database dismounted.
+    ORACLE instance shut down.
+    ERROR:
+    ORA-12514: TNS:listener does not currently know of service requested in connect
+    descriptor
+    
+    
+    Warning: You are no longer connected to ORACLE.
+    SQL> conn /as sysdba
+    Connected to an idle instance.
+    SQL> startup;
+    
+    ORACLE instance started.
+    
+    Total System Global Area 1342177280 bytes
+    Fixed Size                  8792536 bytes
+    Variable Size             369100328 bytes
+    Database Buffers          956301312 bytes
+    Redo Buffers                7983104 bytes
+    Database mounted.
+    Database opened.
+    SQL> SQL>
+    
+    
+    
+    ![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/a9f92652-f350-4db7-a2a7-5205099edacd)
+
+
+
+
+
+
+
+
+
+    
+    sangbinlee9@master:~$ sudo docker exec -it local\_db bash -c "cat /home/oracle/.bashrc"
+    [sudo] password for sangbinlee9:
+    # .bashrc
+    
+    # Source global definitions
+    if [ -f /etc/bashrc ]; then
+            . /etc/bashrc
+    fi
+    
+    # Uncomment the following line if you don't like systemctl's auto-paging feature:
+    # export SYSTEMD_PAGER=
+    
+    # User specific aliases and functions
+    export ORACLE_HOME=/u01/app/oracle/product/12.2.0/dbhome_1
+    export OH=/u01/app/oracle/product/12.2.0/dbhome_1
+    export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/u01/app/oracle/product/12.2.0/dbhome_1/bin
+    export TNS_ADMIN=/u01/app/oracle/product/12.2.0/dbhome_1/admin/ORCLCDB
+    export ORACLE_SID=ORCLCDB;
+    sangbinlee9@master:~$ sudo docker exec -it local\_db bash -c "echo \\"export TZ='Asia/Seoul'\\" >> /home/oracle/.bashrc"
+    export
+    sangbinlee9@master:~$ sudo docker exec -it local\_db bash -c "cat /home/oracle/.bashrc"
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+# SQL Developer 23.1
+    https://www.oracle.com/database/sqldeveloper/technologies/download/
 
 # data import , restore
 
