@@ -4,7 +4,7 @@
 
 
 
-# download rufus 
+# download rufus and install
 
   https://rufus.ie/ko/
 
@@ -13,12 +13,9 @@
 
 
 
-
-
-
-
-# write usb with iso file
-![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/079ac97d-bd44-4bff-afbd-0919b713b953)
+# Create a bootable USB stick with Rufus on Windows
+  https://ubuntu.com/tutorials/create-a-usb-stick-on-windows#5-write-the-iso
+  
 
 
 # and then installing system - kernel, swap, grub, 
