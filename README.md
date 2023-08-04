@@ -159,19 +159,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+# tomcat
 
 
 
@@ -183,5 +171,15 @@
 
 # oracle
 
-# and reboot
+
+
+
+# data import , restore
+
+
+
+
+
+
+# deploy 
 
