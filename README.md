@@ -126,6 +126,61 @@
 
 
 
+# docker status
+
+    
+    sangbinlee9@master:~$ sudo systemctl status docker
+    [sudo] password for sangbinlee9:
+    ● docker.service - Docker Application Container Engine
+         Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+         Active: active (running) since Fri 2023-08-04 14:14:46 UTC; 47min ago
+    TriggeredBy: ● docker.socket
+           Docs: https://docs.docker.com
+       Main PID: 774 (dockerd)
+          Tasks: 11
+         Memory: 100.4M
+            CPU: 1.144s
+         CGroup: /system.slice/docker.service
+                 └─774 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+    
+    Aug 04 14:14:45 master dockerd[774]: time="2023-08-04T14:14:45.807090537Z" level=info msg="detected 127.0.0.53 nameserver, assuming systemd-resolved, so using resolv.conf: /run/systemd/resolve/resolv.conf"
+    Aug 04 14:14:45 master dockerd[774]: time="2023-08-04T14:14:45.912733667Z" level=info msg="[graphdriver] using prior storage driver: overlay2"
+    Aug 04 14:14:45 master dockerd[774]: time="2023-08-04T14:14:45.916673794Z" level=info msg="Loading containers: start."
+    Aug 04 14:14:46 master dockerd[774]: time="2023-08-04T14:14:46.344812557Z" level=info msg="Default bridge (docker0) is assigned with an IP address 172.17.0.0/16. Daemon option --bip can be used to set a pr>
+    Aug 04 14:14:46 master dockerd[774]: time="2023-08-04T14:14:46.390936064Z" level=info msg="Loading containers: done."
+    Aug 04 14:14:46 master dockerd[774]: time="2023-08-04T14:14:46.441182778Z" level=info msg="Docker daemon" commit=a61e2b4 graphdriver=overlay2 version=24.0.5
+    Aug 04 14:14:46 master dockerd[774]: time="2023-08-04T14:14:46.441433515Z" level=info msg="Daemon has completed initialization"
+    Aug 04 14:14:46 master systemd[1]: Started Docker Application Container Engine.
+    Aug 04 14:14:46 master dockerd[774]: time="2023-08-04T14:14:46.474173161Z" level=info msg="API listen on /run/docker.sock"
+    Aug 04 14:23:13 master dockerd[774]: time="2023-08-04T14:23:13.697530209Z" level=info msg="ignoring event" container=6503ce28c1a90958777dc42b4d129b5890a685c4165d0803e6ccc17f523b6aa2 module=libcontainerd na>
+    lines 1-22/22 (END)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # oracle
 
 # and reboot
