@@ -241,6 +241,13 @@
     hello-world   latest    9c7a54a9a43c   3 months ago   13.3kB
     tomcat        7         9dfd74e6bc2f   2 years ago    533MB
     
+# Running a Docker Container
+
+    
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+    sangbinlee9@master:~$ sudo docker ps -l
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
     
 
