@@ -307,7 +307,7 @@
 
 
 
-# oracle
+# oracle DOCKER  - https://kindloveit.tistory.com/13#google_vignette 참조
 
     docker pull wvbirder/database-enterprise:12.2.0.1-slim
 
@@ -576,8 +576,16 @@
     1 row updated.
     
     SQL> commit;
-    
+
     Commit complete.
+
+    // 생략 부분 시작
+      SQL> update sys.props$ set value$='KO16MSWIN949' where name='NLS_CHARACTERSET';
+      update sys.props$ set value$='KO16MSWIN949' where name='NLS_NCHAR_CHARACTERSET';
+      update sys.props$ set value$='AMERICAN_AMERICA.KO16MSWIN949' where name='NLS_LANGUAGE';
+    // 생략 부분 끝
+
+  
      
     SQL> shutdown immediate;
     Database closed.
@@ -609,6 +617,7 @@
 ![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/a9f92652-f350-4db7-a2a7-5205099edacd)
 
 
+![image](https://github.com/sangbinlee/install-ubuntu/assets/4024414/bf1f6346-87fd-4a83-95bd-8119291fdd27)
 
 
 
