@@ -248,8 +248,25 @@
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
     sangbinlee9@master:~$ sudo docker ps -l
     CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
-
     
+        
+    
+    sangbinlee9@master:~$ sudo docker ps
+    CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE           COMMAND             CREATED         STATUS                        PORTS     NAMES
+    a6d5b87e4026   tomcat:latest   "catalina.sh run"   2 minutes ago   Exited (130) 14 seconds ago             beautiful_varahamihira
+    sangbinlee9@master:~$ sudo docker ps -l
+    CONTAINER ID   IMAGE           COMMAND             CREATED         STATUS                        PORTS     NAMES
+    a6d5b87e4026   tomcat:latest   "catalina.sh run"   3 minutes ago   Exited (130) 20 seconds ago             beautiful_varahamihira
+    
+    
+
+
+
+
+
+
 
 # ufw
 
