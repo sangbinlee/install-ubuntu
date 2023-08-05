@@ -1276,3 +1276,113 @@
 
 
 
+# Apache Web & Application Server on Docker
+    dockgit clone https://github.com/Paritosh-Anand/Docker-Httpd-Tomcat.git
+
+
+
+
+    
+    
+    root@kpismain:~/Docker-Httpd-Tomcat# docker compose up -d
+    [+] Building 19.2s (19/19) FINISHED
+     => [httpd internal] load build definition from Dockerfile                                             0.0s
+     => => transferring dockerfile: 528B                                                                   0.0s
+     => [httpd internal] load .dockerignore                                                                0.0s
+     => => transferring context: 2B                                                                        0.0s
+     => [tomcat internal] load build definition from Dockerfile                                            0.0s
+     => => transferring dockerfile: 208B                                                                   0.0s
+     => [tomcat internal] load .dockerignore                                                               0.0s
+     => => transferring context: 2B                                                                        0.0s
+     => [httpd internal] load metadata for docker.io/library/ubuntu:latest                                 2.3s
+     => [tomcat internal] load metadata for docker.io/library/tomcat:9.0                                   2.4s
+     => [httpd 1/6] FROM docker.io/library/ubuntu:latest@sha256:0bced47fffa3361afa981854fcabcd4577cd43ceb  0.0s
+     => => resolve docker.io/library/ubuntu:latest@sha256:0bced47fffa3361afa981854fcabcd4577cd43cebbb808c  0.0s
+     => => sha256:0bced47fffa3361afa981854fcabcd4577cd43cebbb808cea2b1f33a3dd7f508 1.13kB / 1.13kB         0.0s
+     => => sha256:b060fffe8e1561c9c3e6dea6db487b900100fc26830b9ea2ec966c151ab4c020 424B / 424B             0.0s
+     => => sha256:5a81c4b8502e4979e75bd8f91343b95b0d695ab67f241dbed0d1530a35bde1eb 2.30kB / 2.30kB         0.0s
+     => [httpd internal] load build context                                                                0.0s
+     => => transferring context: 10.35kB                                                                   0.0s
+     => [tomcat 1/3] FROM docker.io/library/tomcat:9.0@sha256:7ff9c1ad4f6265f4eb81851072f971b861f06f38c7f  2.0s
+     => => resolve docker.io/library/tomcat:9.0@sha256:7ff9c1ad4f6265f4eb81851072f971b861f06f38c7f8936943  0.0s
+     => => sha256:1d4c657a92809f34421feac1fd97a5e89e5c6d67962eff024528dcc070e9cba3 173B / 173B             0.6s
+     => => sha256:e77c55930573d50bc84de3721f5e22e119eb422127a213a547a57b37907baa21 13.22MB / 13.22MB       1.8s
+     => => sha256:fc246adea39f9d6ae62861796d7eea0d3416f5dcd98c5e4252fc6c964ce99a09 130B / 130B             0.7s
+     => => sha256:7fba28b0e5d7f844225f3080160473ae641c5e82da7a2bcb306648958f934ecc 1.79kB / 1.79kB         0.0s
+     => => sha256:ee772f2dcb3684ed53ded3f70e44a640af73adeb83cfecd8fec6bbc0338f276e 13.08kB / 13.08kB       0.0s
+     => => sha256:7ff9c1ad4f6265f4eb81851072f971b861f06f38c7f8936943b832573fd03258 1.21kB / 1.21kB         0.0s
+     => => extracting sha256:1d4c657a92809f34421feac1fd97a5e89e5c6d67962eff024528dcc070e9cba3              0.0s
+     => => extracting sha256:e77c55930573d50bc84de3721f5e22e119eb422127a213a547a57b37907baa21              0.1s
+     => => extracting sha256:fc246adea39f9d6ae62861796d7eea0d3416f5dcd98c5e4252fc6c964ce99a09              0.0s
+     => [tomcat internal] load build context                                                               0.0s
+     => => transferring context: 12.27kB                                                                   0.0s
+     => [httpd 2/6] RUN apt-get update && apt-get install -y --no-install-recommends apache2 libapache2-  16.2s
+     => [tomcat 2/3] COPY server.xml /usr/local/tomcat/conf/                                               0.0s
+     => [tomcat 3/3] COPY ./sample.war /usr/local/tomcat/webapps/sample.war                                0.0s
+     => [tomcat] exporting to image                                                                        0.0s
+     => => exporting layers                                                                                0.0s
+     => => writing image sha256:e6d0a7b8d40b26f6ba4f4c0142fb7b19a755d65b63067fe33db90348e465e059           0.0s
+     => => naming to docker.io/library/docker-httpd-tomcat-tomcat                                          0.0s
+     => [httpd 3/6] ADD apache2.conf /etc/apache2/apache2.conf                                             0.0s
+     => [httpd 4/6] ADD 000-default.conf /etc/apache2/sites-enabled/000-default.conf                       0.0s
+     => [httpd 5/6] ADD worker.properties /etc/libapache2-mod-jk/workers.properties                        0.0s
+     => [httpd 6/6] ADD jk.conf /etc/apache2/mods-available/jk.conf                                        0.0s
+     => [httpd] exporting to image                                                                         0.5s
+     => => exporting layers                                                                                0.5s
+     => => writing image sha256:a6e8d262383a67512f3c6024a1fc6e90209ae0e3aff3dfa6b6efb895cb42835d           0.0s
+     => => naming to docker.io/library/docker-httpd-tomcat-httpd                                           0.0s
+    [+] Running 3/3
+     ✔ Network docker-httpd-tomcat_default     Created                                                     0.1s
+     ✔ Container docker-httpd-tomcat-httpd-1   Started                                                     0.4s
+     ✔ Container docker-httpd-tomcat-tomcat-1  Started                                                     0.4s
+    root@kpismain:~/Docker-Httpd-Tomcat# docker images
+    REPOSITORY                          TAG             IMAGE ID       CREATED          SIZE
+    docker-httpd-tomcat-httpd           latest          a6e8d262383a   28 seconds ago   218MB
+    docker-httpd-tomcat-tomcat          latest          e6d0a7b8d40b   43 seconds ago   427MB
+    spring-petclinic-docker-petclinic   latest          6a066392b46f   3 hours ago      510MB
+    mysql                               5.7             92034fe9a41f   2 days ago       581MB
+    mysql                               8               54150e9955c4   2 days ago       577MB
+    postgres                            15.3            8769343ac885   8 days ago       412MB
+    testcontainers/ryuk                 0.5.1           ec913eeff75a   2 months ago     12.7MB
+    hello-world                         latest          9c7a54a9a43c   3 months ago     13.3kB
+    centos                              7               eeb6ee3f44bd   22 months ago    204MB
+    wvbirder/database-enterprise        12.2.0.1-slim   27c9559d36ec   5 years ago      2.08GB
+    mysql                               5.7.8           adedf30d6136   7 years ago      358MB
+
+
+    
+    root@kpismain:~/Docker-Httpd-Tomcat# docker ps -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED              STATUS                     PORTS                                                                                  NAMES
+    ab8515518d09   docker-httpd-tomcat-tomcat                   "catalina.sh run"        About a minute ago   Up About a minute          8009/tcp, 8080/tcp                                                                     docker-httpd-tomcat-tomcat-1
+    01dde4958e2e   docker-httpd-tomcat-httpd                    "apachectl -k start …"   About a minute ago   Up About a minute          443/tcp, 0.0.0.0:32768->80/tcp, :::32768->80/tcp                                       docker-httpd-tomcat-httpd-1
+    1560bdb645a3   spring-petclinic-docker-petclinic            "./mvnw spring-boot:…"   3 hours ago          Up 3 hours                 0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   spring-petclinic-docker-petclinic-1
+    2227f628a554   mysql:8                                      "docker-entrypoint.s…"   3 hours ago          Up 3 hours                 0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp                                   spring-petclinic-docker-mysqlserver-1
+    1f01568c1cc4   centos:7                                     "/bin/bash"              7 hours ago          Exited (0) 7 hours ago                                                                                            sharp_euler
+    4dca7a39b847   mysql:5.7.8                                  "/entrypoint.sh mysq…"   8 hours ago          Exited (0) 4 hours ago                                                                                            happy_moore
+    980043b72b50   postgres:15.3                                "docker-entrypoint.s…"   8 hours ago          Exited (0) 8 hours ago                                                                                            spring-petclinic-postgres-1
+    3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   14 hours ago         Exited (137) 4 hours ago                                                                                          local_db
+    9f264267c1e4   hello-world                                  "/hello"                 14 hours ago         Exited (0) 14 hours ago                                                                                           crazy_wing
+    root@kpismain:~/Docker-Httpd-Tomcat#
+
+    
+    
+    root@kpismain:~/Docker-Httpd-Tomcat# docker compose ps
+    NAME                           IMAGE                        COMMAND                  SERVICE             CREATED              STATUS              PORTS
+    docker-httpd-tomcat-httpd-1    docker-httpd-tomcat-httpd    "apachectl -k start …"   httpd               About a minute ago   Up About a minute   443/tcp, 0.0.0.0:32768->80/tcp, :::32768->80/tcp
+    docker-httpd-tomcat-tomcat-1   docker-httpd-tomcat-tomcat   "catalina.sh run"        tomcat              About a minute ago   Up About a minute   8009/tcp, 8080/tcp
+    root@kpismain:~/Docker-Httpd-Tomcat#
+
+
+# todo test    
+    http://localhost:32776/ -- Apache HTTP default page
+    http://localhost:32776/sample/ -- Sample web app from Apache Tomcat
+
+
+
+
+
+
+
+    
+
+    
