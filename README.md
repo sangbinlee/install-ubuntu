@@ -1049,5 +1049,208 @@
     root@kpismain:~/spring-petclinic-docker#
     
 
+    
+    
+       28  docker pull wvbirder/database-enterprise:12.2.0.1-slim
+       29  docker images
+       30  docker run -dit --name local_db -p 1521:1521 wvbirder/database-enterprise:12.2.0.1-slim
+       31  docker ps -a
+       32  docker logs -f local_db
+       33  cd ~
+       34  pwd
+       35  docker exec -it local_db bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
+       36  reboot now
+       37  cd ~
+       38  ll
+       39  vi docker-compose-httpd.yml
+       40  ll
+       41  cat docker-compose-httpd.yml
+       42  vi docker-compose-tomcat.yml
+       43  ll
+       44  ip address
+       45  history
+       46  ufw status
+       47  ufw enable
+       48  ufw status
+       49  ufw enable
+       50  ufw statjus
+       51  ufw status
+       52  ufw allow 1521
+       53  ufw status
+       54  ufw allow 80
+       55  ufw allow 8080
+       56  ufw status
+       57  ufw allow 22
+       58  mv /home/master/SampleWebApp.war /root/
+       59  ll
+       60  pwd
+       61  history
+       62  apt install git
+       63  git
+       64  history
+       65  git --version
+       66  which git
+       67  cd /usr/bin/gi
+       68  cd /usr/bin/git
+       69  cd /usr/bin
+       70  ll
+       71  ll git*
+       72  ll
+       73  cd ~
+       74  ll
+       75  git init
+       76  ll
+       77  exit
+       78  cd ~
+       79  ll
+       80  git clone https://github.com/Paritosh-Anand/Docker-Httpd-Tomcat.git
+       81  ll
+       82  cd Docker-Httpd-Tomcat/
+       83  ll
+       84  cat docker-compose.yml
+       85  ll
+       86  cat README.md
+       87  cd ~
+       88  ll
+       89  cd .ssh/
+       90  ll
+       91  exit
+       92  cd~
+       93  cd ~
+       94  pwd
+       95  ll
+       96  git clone https://github.com/AdoreJE/docker-httpd-tomcat-cluster.git
+       97  ll
+       98  java -version
+       99  ll
+      100  git clone https://github.com/spring-petclinic/spring-framework-petclinic.git
+      101  ll
+      102  history
+      103  apt install maven
+      104  history
+      105  mvn
+      106  mvn --version
+      107  which maven
+      108  which mvn
+      109  cd /etc/
+      110  ll
+      111  ll env*
+      112  cat environment
+      113  cd~
+      114  cd ~
+      115  ll
+      116  cd spring-framework-petclinic/
+      117  ll
+      118  history
+      119  cd ..
+      120  pwd
+      121  ll
+      122  git clone https://github.com/spring-projects/spring-petclinic.git
+      123  cd spring-petclinic
+      124  ./mvnw package
+      125  java -jar target/*.jar
+      126  ll
+      127  java -version
+      128  history
+      129  ./mvnw package
+      130  ll
+      131  java -version
+      132  which java
+      133  java $JAVA_HOME
+      134  echo $JAVA_HOME
+      135  vi /etc/environment
+      136  echo $JAVA_HOME
+      137  history
+      138  source /etc/environment
+      139  echo $JAVA_HOME
+      140  java -jar target/*.jar
+      141  ./mvnw spring-boot:run
+      142  ll
+      143  cat docker-compose.yml
+      144  docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8
+      145  cd ~
+      146  ll
+      147  history
+      148  ll
+      149  pwd
+      150  ll
+      151  history
+      152  pwd
+      153  ll
+      154
+      155  git clone https://github.com/dockersamples/spring-petclinic-docker
+      156  ll
+      157  cd spring-petclinic-docker/
+      158  ll
+      159  ./mvnw package
+      160  ll
+      161  cd target/
+      162  ll
+      163  cd ..
+      164  java -jar target/*.jar
+      165  docker ps -a
+      166  docker ps -l
+      167  docker ps -a
+      168  docker images
+      169  history
+      170  docker images
+      171  docker run -dit --name local_db -p 1521:1521 wvbirder/database-enterprise:12.2.0.1-slim
+      172  docker ps -a
+      173  docker container ls
+      174  docker container ls -a
+      175  docker start local_db
+      176  docker ps -a
+      177  history |grep docker run
+      178  history |grep "docker run"
+      179  docker run -it centos:7 /bin/bash
+      180  docker ps -a
+      181  history
+      182  ll
+      183  cat docker-compose.yml
+      184  docker ps -a
+      185  ll
+      186  cat Dockerfile.multi
+      187  happy_moore
+      188  docker stop happy_moore
+      189  docker ps -a
+      190  reboot now
+      191  cd ~
+      192  history
+      193  ll
+      194  cd spring-petclinic-docker/
+      195  ls
+      196  ll
+      197  cat Dockerfile
+      198  cat Dockerfile.multi
+      199  docker compose up -d --build
+      200  curl --request GET \ --url http://localhost:8080/vets \ --header 'content-type: application/json'
+      201  docker images
+      202  docker ps -a
+      203  history
+    root@kpismain:~/spring-petclinic-docker#
 
 
+
+    
+    
+    root@kpismain:~/spring-petclinic-docker# docker images
+    REPOSITORY                          TAG             IMAGE ID       CREATED         SIZE
+    spring-petclinic-docker-petclinic   latest          6a066392b46f   2 hours ago     510MB
+    mysql                               5.7             92034fe9a41f   2 days ago      581MB
+    mysql                               8               54150e9955c4   2 days ago      577MB
+    postgres                            15.3            8769343ac885   8 days ago      412MB
+    testcontainers/ryuk                 0.5.1           ec913eeff75a   2 months ago    12.7MB
+    hello-world                         latest          9c7a54a9a43c   3 months ago    13.3kB
+    centos                              7               eeb6ee3f44bd   22 months ago   204MB
+    wvbirder/database-enterprise        12.2.0.1-slim   27c9559d36ec   5 years ago     2.08GB
+    mysql                               5.7.8           adedf30d6136   7 years ago     358MB
+    root@kpismain:~/spring-petclinic-docker# docker ps -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED        STATUS                     PORTS                                                                                  NAMES
+    1560bdb645a3   spring-petclinic-docker-petclinic            "./mvnw spring-boot:…"   2 hours ago    Up 2 hours                 0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   spring-petclinic-docker-petclinic-1
+    2227f628a554   mysql:8                                      "docker-entrypoint.s…"   2 hours ago    Up 2 hours                 0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp                                   spring-petclinic-docker-mysqlserver-1
+    1f01568c1cc4   centos:7                                     "/bin/bash"              6 hours ago    Exited (0) 5 hours ago                                                                                            sharp_euler
+    4dca7a39b847   mysql:5.7.8                                  "/entrypoint.sh mysq…"   7 hours ago    Exited (0) 2 hours ago                                                                                            happy_moore
+    980043b72b50   postgres:15.3                                "docker-entrypoint.s…"   7 hours ago    Exited (0) 7 hours ago                                                                                            spring-petclinic-postgres-1
+    3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   12 hours ago   Exited (137) 2 hours ago                                                                                          local_db
+    9f264267c1e4   hello-world                                  "/hello"                 13 hours ago   Exited (0) 13 hours ago                                                                                           crazy_wing
+    root@kpismain:~/spring-petclinic-docker#
