@@ -1254,3 +1254,25 @@
     3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   12 hours ago   Exited (137) 2 hours ago                                                                                          local_db
     9f264267c1e4   hello-world                                  "/hello"                 13 hours ago   Exited (0) 13 hours ago                                                                                           crazy_wing
     root@kpismain:~/spring-petclinic-docker#
+
+
+
+
+# start created stopped container
+    
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED        STATUS                        PORTS                                                 NAMES
+    776e2c6bf260   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   21 hours ago   Up About a minute (healthy)   0.0.0.0:1521->1521/tcp, :::1521->1521/tcp, 5500/tcp   local_db
+    sangbinlee9@master:~$ sudo docker start local_db
+    local_db
+    sangbinlee9@master:~$ sudo docker ps -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED        STATUS                        PORTS                                                 NAMES
+    776e2c6bf260   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   21 hours ago   Up About a minute (healthy)   0.0.0.0:1521->1521/tcp, :::1521->1521/tcp, 5500/tcp   local_db
+    sangbinlee9@master:~$
+
+
+
+
+
+
+
