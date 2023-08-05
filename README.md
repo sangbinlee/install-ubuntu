@@ -973,5 +973,81 @@
     Dockerfile
     
 
+# Using Docker Compose to develop locally
+    	
+    root@kpismain:~/spring-petclinic-docker# cat Dockerfile
+    FROM eclipse-temurin:17-jdk-jammy
+    
+    WORKDIR /app
+    
+    COPY .mvn/ .mvn
+    COPY mvnw pom.xml ./
+    RUN ./mvnw dependency:resolve
+    
+    COPY src ./src
+    
+    CMD ["./mvnw", "spring-boot:run"]
+    root@kpismain:~/spring-petclinic-docker# cat Dockerfile.multi
+    FROM eclipse-temurin:17-jdk-jammy as base
+    WORKDIR /app
+    COPY .mvn/ .mvn
+    COPY mvnw pom.xml ./
+    RUN ./mvnw dependency:resolve
+    COPY src ./src
+    
+    FROM base as development
+    CMD ["./mvnw", "spring-boot:run", "-Dspring-boot.run.profiles=mysql", "-Dspring-boot.run.jvmArguments='-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:8000'"]
+    
+    FROM base as build
+    RUN ./mvnw package
+    
+    
+    FROM eclipse-temurin:17-jre-jammy as production
+    EXPOSE 8080
+    COPY --from=build /app/target/spring-petclinic-*.jar /spring-petclinic.jar
+    CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/spring-petclinic.jar"]
+
+
+    // https://www.docker.com/blog/containerizing-a-legendary-petclinic-app-built-with-spring-boot/ 참
+    root@kpismain:~/spring-petclinic-docker# docker compose up -d --build
+
+
+    위에서 We pass the --build flag so Docker will compile our image and start our containers. Your terminal output will resemble what’s shown below if this is successful:
+
+
+    
+                                                                                                                                                                                                                               0.5s
+    root@kpismain:~/spring-petclinic-docker# curl --request GET \ --url http://localhost:8080/vets \ --header 'content-type: application/json'
+    curl: (3) URL using bad/illegal format or missing URL
+    {"vetList":[{"id":1,"firstName":"James","lastName":"Carter","specialties":[],"nrOfSpecialties":0,"new":false},{"id":2,"firstName":"Helen","lastName":"Leary","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":3,"firstName":"Linda","lastName":"Douglas","specialties":[{"id":3,"name":"dentistry","new":false},{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":2,"new":false},{"id":4,"firstName":"Rafael","lastName":"Ortega","specialties":[{"id":2,"name":"surgery","new":false}],"nrOfSpecialties":1,"new":false},{"id":5,"firstName":"Henry","lastName":"Stevens","specialties":[{"id":1,"name":"radiology","new":false}],"nrOfSpecialties":1,"new":false},{"id":6,"firstName":"Sharon","lastName":"Jenkins","specialties":[],"nrOfSpecialties":0,"new":false}]}curl: (3) URL using bad/illegal format or missing URL
+    curl: (3) URL using bad/illegal format or missing URL
+    root@kpismain:~/spring-petclinic-docker#
+
+
+    
+    
+    root@kpismain:~/spring-petclinic-docker# docker images
+    REPOSITORY                          TAG             IMAGE ID       CREATED         SIZE
+    spring-petclinic-docker-petclinic   latest          6a066392b46f   4 minutes ago   510MB
+    mysql                               5.7             92034fe9a41f   2 days ago      581MB
+    mysql                               8               54150e9955c4   2 days ago      577MB
+    postgres                            15.3            8769343ac885   8 days ago      412MB
+    testcontainers/ryuk                 0.5.1           ec913eeff75a   2 months ago    12.7MB
+    hello-world                         latest          9c7a54a9a43c   3 months ago    13.3kB
+    centos                              7               eeb6ee3f44bd   22 months ago   204MB
+    wvbirder/database-enterprise        12.2.0.1-slim   27c9559d36ec   5 years ago     2.08GB
+    mysql                               5.7.8           adedf30d6136   7 years ago     358MB
+    root@kpismain:~/spring-petclinic-docker# docker ps -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED         STATUS                        PORTS                                                                                  NAMES
+    1560bdb645a3   spring-petclinic-docker-petclinic            "./mvnw spring-boot:…"   5 minutes ago   Up 4 minutes                  0.0.0.0:8000->8000/tcp, :::8000->8000/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   spring-petclinic-docker-petclinic-1
+    2227f628a554   mysql:8                                      "docker-entrypoint.s…"   5 minutes ago   Up 4 minutes                  0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp                                   spring-petclinic-docker-mysqlserver-1
+    1f01568c1cc4   centos:7                                     "/bin/bash"              4 hours ago     Exited (0) 4 hours ago                                                                                               sharp_euler
+    4dca7a39b847   mysql:5.7.8                                  "/entrypoint.sh mysq…"   5 hours ago     Exited (0) 14 minutes ago                                                                                            happy_moore
+    980043b72b50   postgres:15.3                                "docker-entrypoint.s…"   5 hours ago     Exited (0) 5 hours ago                                                                                               spring-petclinic-postgres-1
+    3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   10 hours ago    Exited (137) 13 minutes ago                                                                                          local_db
+    9f264267c1e4   hello-world                                  "/hello"                 11 hours ago    Exited (0) 11 hours ago                                                                                              crazy_wing
+    root@kpismain:~/spring-petclinic-docker#
+    
+
 
 
