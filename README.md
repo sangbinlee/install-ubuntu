@@ -815,10 +815,31 @@
 
 
 
+# 
+    
+    git clone https://github.com/spring-projects/spring-petclinic.git
+    cd spring-petclinic
+    ./mvnw package
+    java -jar target/*.jar
 
 
 
 
+
+# jdk 17
+
+
+    apt install openjdk-17-jdk
+    java -version
+    vi /etc/environment
+      PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+      JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"    
+  
+    source /etc/environment
+    echo $JAVA_HOME
+
+# jdk 17 remove
+    apt remove openjdk-17-jdk
 
 
 # data import , restore
