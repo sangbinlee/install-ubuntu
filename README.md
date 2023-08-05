@@ -405,6 +405,127 @@
     sangbinlee9@master:~$
 
 
+
+
+    
+    root@kpismain:~/spring-petclinic-docker# docker ps -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED             STATUS                             PORTS                                                 NAMES
+    4dca7a39b847   mysql:5.7.8                                  "/entrypoint.sh mysq…"   55 minutes ago      Up 55 minutes                      0.0.0.0:3306->3306/tcp, :::3306->3306/tcp             happy_moore
+    980043b72b50   postgres:15.3                                "docker-entrypoint.s…"   About an hour ago   Exited (0) About an hour ago                                                             spring-petclinic-postgres-1
+    3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   7 hours ago         Up 52 seconds (health: starting)   0.0.0.0:1521->1521/tcp, :::1521->1521/tcp, 5500/tcp   local_db
+    9f264267c1e4   hello-world                                  "/hello"                 7 hours ago         Exited (0) 7 hours ago                                                                   crazy_wing
+    root@kpismain:~/spring-petclinic-docker#
+
+    
+    root@kpismain:~/spring-petclinic-docker# docker container ls -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED             STATUS                         PORTS                                       NAMES
+    4dca7a39b847   mysql:5.7.8                                  "/entrypoint.sh mysq…"   54 minutes ago      Up 54 minutes                  0.0.0.0:3306->3306/tcp, :::3306->3306/tcp   happy_moore
+    980043b72b50   postgres:15.3                                "docker-entrypoint.s…"   About an hour ago   Exited (0) About an hour ago                                               spring-petclinic-postgres-1
+    3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   7 hours ago         Exited (137) 4 hours ago                                                   local_db
+    9f264267c1e4   hello-world                                  "/hello"                 7 hours ago         Exited (0) 7 hours ago                                                     crazy_wing
+    root@kpismain:~/spring-petclinic-docker# ^C
+    root@kpismain:~/spring-petclinic-docker# docker start local_db
+    local_db
+    root@kpismain:~/spring-petclinic-docker# docker ps -a
+    CONTAINER ID   IMAGE                                        COMMAND                  CREATED             STATUS                            PORTS                                                 NAMES
+    4dca7a39b847   mysql:5.7.8                                  "/entrypoint.sh mysq…"   55 minutes ago      Up 55 minutes                     0.0.0.0:3306->3306/tcp, :::3306->3306/tcp             happy_moore
+    980043b72b50   postgres:15.3                                "docker-entrypoint.s…"   About an hour ago   Exited (0) About an hour ago                                                            spring-petclinic-postgres-1
+    3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   7 hours ago         Up 4 seconds (health: starting)   0.0.0.0:1521->1521/tcp, :::1521->1521/tcp, 5500/tcp   local_db
+    9f264267c1e4   hello-world                                  "/hello"                 7 hours ago         Exited (0) 7 hours ago                                                                  crazy_wing
+    root@kpismain:~/spring-petclinic-docker# docker ps -a
+
+
+    // 참고 https://javacan.tistory.com/entry/docker-start-3-port-env-local-storage
+    // -e 옵션(--env 옵션)을 사용하면 컨테이너를 실행할 때 환경 변수를 전달할 수 있다. 예를 들어 mysql 이미지의 실행 프로그램은 MYSQL_ROOT_PASSWORD 환경 변수를 이용해서 DB의 root 암호를 설정한다. 
+    docker run --name mysqldb \
+               -e MYSQL_ROOT_PASSWORD=rootpw \
+               -p 33060:3306 -d mysql:5.7
+
+
+    로컬 스토리지 연결
+    아래와 같이 nginx 이미지를 이용해서 생성한 컨테이너에 bash로 연결해서 /usr/share/nginx/html 디렉토리에 echo.txt 파일을 생성해보자.
+    
+    vagrant@ubuntu-bionic:~$ docker run -d -p 8080:80 --name web nginx:latest
+    
+    vagrant@ubuntu-bionic:~$ docker exec -it web bash
+    
+    root@fe306ef365a7:~# cd /usr/share/nginx/html/
+    
+    root@fe306ef365a7:/usr/share/nginx/html# echo "echo file" > echo.txt
+    
+    root@fe306ef365a7:/usr/share/nginx/html# exit
+
+    
+
+    vagrant@ubuntu-bionic:~/html$ echo '<html><body>index</body></html>' > index.html
+    
+    vagrant@ubuntu-bionic:~/html$ echo 'echo file in local' > echo.txt
+    
+    vagrant@ubuntu-bionic:~/html$ docker run -d --name web --rm \
+    >   --mount type=bind,src=/home/vagrant/html,dst=/usr/share/nginx/html \
+    >   -p 8080:80 \
+    >   nginx:latest
+    d1530bacb7176c9fe36d0f1097661deaf6f471edd3ddd3d849c51eeeb43b16c0
+    
+    vagrant@ubuntu-bionic:~/html$
+
+
+    docker ps -a
+    // 실행 중인 컨테이너를 중지
+    docker stop 7d78d9
+
+    // 컨테이너 삭제
+    docker rm web
+
+    //  컨테이너를 실행할 때 --rm 옵션을 줄 수도 있다. 이 옵션을 사용하면 컨테이너가 종료될 때 컨테이너를 자동으로 삭제한다.
+    docker run -d --rm --name web -p 8080:80 nginx:latest
+
+    docker logs 명령어로 컨테이너의 로그
+    docker logs web
+
+
+
+
+
+
+# centos:7
+    
+    docker exec -it web /bin/bash
+    
+    
+    root@kpismain:~/spring-petclinic-docker# docker run -it centos:7 /bin/bash
+    Unable to find image 'centos:7' locally
+    7: Pulling from library/centos
+    2d473b07cdd5: Pull complete
+    Digest: sha256:be65f488b7764ad3638f236b7b515b3678369a5124c47b8d32916d6487418ea4
+    Status: Downloaded newer image for centos:7
+    [root@1f01568c1cc4 /]# ll
+    total 56
+    -rw-r--r--   1 root root 12114 Nov 13  2020 anaconda-post.log
+    lrwxrwxrwx   1 root root     7 Nov 13  2020 bin -> usr/bin
+    drwxr-xr-x   5 root root   360 Aug  5 08:41 dev
+    drwxr-xr-x   1 root root  4096 Aug  5 08:41 etc
+    drwxr-xr-x   2 root root  4096 Apr 11  2018 home
+    lrwxrwxrwx   1 root root     7 Nov 13  2020 lib -> usr/lib
+    lrwxrwxrwx   1 root root     9 Nov 13  2020 lib64 -> usr/lib64
+    drwxr-xr-x   2 root root  4096 Apr 11  2018 media
+    drwxr-xr-x   2 root root  4096 Apr 11  2018 mnt
+    drwxr-xr-x   2 root root  4096 Apr 11  2018 opt
+    dr-xr-xr-x 395 root root     0 Aug  5 08:41 proc
+    dr-xr-x---   2 root root  4096 Nov 13  2020 root
+    drwxr-xr-x  11 root root  4096 Nov 13  2020 run
+    lrwxrwxrwx   1 root root     8 Nov 13  2020 sbin -> usr/sbin
+    drwxr-xr-x   2 root root  4096 Apr 11  2018 srv
+    dr-xr-xr-x  13 root root     0 Aug  5 08:41 sys
+    drwxrwxrwt   7 root root  4096 Nov 13  2020 tmp
+    drwxr-xr-x  13 root root  4096 Nov 13  2020 usr
+    drwxr-xr-x  18 root root  4096 Nov 13  2020 var
+    [root@1f01568c1cc4 /]# pwd
+    /
+    [root@1f01568c1cc4 /]#
+
+
+
 # ufw
 
     sangbinlee9@master:~$ sudo ufw enable
@@ -648,8 +769,7 @@
 
  
 
-
-
+    // docker exec는 실행 중인 컨테이너에서 특정 명령을 실행할 때 사용
     docker exec -it local_db bash -c "source /home/oracle/.bashrc; sqlplus sys/Oradoc_db1@ORCLCDB as sysdba"
     
     
@@ -849,5 +969,9 @@
 
 
 
-# deploy 
+# Containerizing the application 
+    Dockerfile
+    
+
+
 
