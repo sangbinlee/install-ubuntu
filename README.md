@@ -1532,3 +1532,14 @@
     4. aws ecr login
     5. docker push <--------------- 여기까지가 개발자가 처리함
     6. argocd 배포 <---------------- aws 운영자에게 개발자가 배포 요청 함
+
+
+
+# mssql
+
+    sudo wget https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
+    sudo add-apt-repository "$(wget -qO- https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2022.list)"
+    sudo apt-get update
+    sudo apt-get install -y mssql-server
+    systemctl status mssql-server --no-pager
+    1443 open firewall
