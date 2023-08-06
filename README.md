@@ -1390,5 +1390,139 @@
 
 
     
+# war 파일 복사하고 확인하고 접속해서 확인
+      
+      
+      root@kpismain:~# docker run -d --name="tomcat-test" -p 8080:8080 tomcat:8
+      dff4f7d1b468f151d6374b51d471de9e3f609d9e8970f1cb2c6a710860e73851
+      root@kpismain:~# docker ps -a
+      CONTAINER ID   IMAGE                                        COMMAND                  CREATED         STATUS                        PORTS                                       NAMES
+      dff4f7d1b468   tomcat:8                                     "catalina.sh run"        5 seconds ago   Up 5 seconds                  0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat-test
+      ab8515518d09   docker-httpd-tomcat-tomcat                   "catalina.sh run"        10 hours ago    Exited (143) 2 minutes ago                                                docker-httpd-tomcat-tomcat-1
+      01dde4958e2e   docker-httpd-tomcat-httpd                    "apachectl -k start …"   10 hours ago    Exited (137) 2 minutes ago                                                docker-httpd-tomcat-httpd-1
+      1560bdb645a3   spring-petclinic-docker-petclinic            "./mvnw spring-boot:…"   14 hours ago    Exited (143) 37 seconds ago                                               spring-petclinic-docker-petclinic-1
+      2227f628a554   mysql:8                                      "docker-entrypoint.s…"   14 hours ago    Exited (0) 19 seconds ago                                                 spring-petclinic-docker-mysqlserver-1
+      1f01568c1cc4   centos:7                                     "/bin/bash"              17 hours ago    Exited (0) 17 hours ago                                                   sharp_euler
+      4dca7a39b847   mysql:5.7.8                                  "/entrypoint.sh mysq…"   18 hours ago    Exited (0) 14 hours ago                                                   happy_moore
+      980043b72b50   postgres:15.3                                "docker-entrypoint.s…"   19 hours ago    Exited (0) 19 hours ago                                                   spring-petclinic-postgres-1
+      3a70363e9a4b   wvbirder/database-enterprise:12.2.0.1-slim   "/bin/sh -c '/bin/ba…"   24 hours ago    Exited (137) 14 hours ago                                                 local_db
+      9f264267c1e4   hello-world                                  "/hello"                 24 hours ago    Exited (0) 24 hours ago                                                   crazy_wing
+      root@kpismain:~# docker ps
+      CONTAINER ID   IMAGE      COMMAND             CREATED              STATUS              PORTS                                       NAMES
+      dff4f7d1b468   tomcat:8   "catalina.sh run"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat-test
+      root@kpismain:~#
+      root@kpismain:~# docker ps
+      CONTAINER ID   IMAGE      COMMAND             CREATED              STATUS              PORTS                                       NAMES
+      dff4f7d1b468   tomcat:8   "catalina.sh run"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat-test
+      root@kpismain:~# ll
+      total 96
+      drwx------ 14 root   root   4096 Aug  5 12:14 ./
+      drwxr-xr-x 19 root   root   4096 Aug  5 00:39 ../
+      -rw-------  1 root   root   3277 Aug  5 16:05 .bash_history
+      -rw-r--r--  1 root   root   3106 Oct 15  2021 .bashrc
+      drwxr-xr-x  3 root   root   4096 Aug  5 07:28 .cache/
+      drwxr-xr-x  3 root   root   4096 Aug  5 07:27 .config/
+      drwx------  3 root   root   4096 Aug  5 12:14 .docker/
+      -rw-r--r--  1 root   root    211 Aug  5 04:47 docker-compose-httpd.yml
+      -rw-r--r--  1 root   root    524 Aug  5 04:48 docker-compose-tomcat.yml
+      drwxr-xr-x  6 root   root   4096 Aug  5 15:42 Docker-Httpd-Tomcat/
+      drwxr-xr-x  8 root   root   4096 Aug  5 06:14 docker-httpd-tomcat-cluster/
+      drwxr-xr-x  7 root   root   4096 Aug  5 05:27 .git/
+      drwxr-xr-x  4 root   root   4096 Aug  5 07:18 .m2/
+      -rw-r--r--  1 root   root    161 Jul  9  2019 .profile
+      -rw-rw-r--  1 master master 8618 Aug  5 04:58 SampleWebApp.war
+      drwx------  3 root   root   4096 Aug  5 00:42 snap/
+      drwxr-xr-x  6 root   root   4096 Aug  5 07:12 spring-framework-petclinic/
+      drwxr-xr-x  9 root   root   4096 Aug  5 07:28 spring-petclinic/
+      drwxr-xr-x  9 root   root   4096 Aug  5 07:59 spring-petclinic-docker/
+      drwx------  2 root   root   4096 Aug  5 00:42 .ssh/
+      -rw-r--r--  1 root   root    146 Aug  5 07:28 .testcontainers.properties
+      -rw-------  1 root   root   2256 Aug  5 07:31 .viminfo
+      root@kpismain:~# docker cp SampleWebApp.war tomcat-test:/usr/local/tomcat/webapps/
+      Successfully copied 10.2kB to tomcat-test:/usr/local/tomcat/webapps/
+      root@kpismain:~# cp SampleWebApp.war ROOT.war
+      root@kpismain:~# ll
+      total 108
+      drwx------ 14 root   root   4096 Aug  6 02:11 ./
+      drwxr-xr-x 19 root   root   4096 Aug  5 00:39 ../
+      -rw-------  1 root   root   3277 Aug  5 16:05 .bash_history
+      -rw-r--r--  1 root   root   3106 Oct 15  2021 .bashrc
+      drwxr-xr-x  3 root   root   4096 Aug  5 07:28 .cache/
+      drwxr-xr-x  3 root   root   4096 Aug  5 07:27 .config/
+      drwx------  3 root   root   4096 Aug  5 12:14 .docker/
+      -rw-r--r--  1 root   root    211 Aug  5 04:47 docker-compose-httpd.yml
+      -rw-r--r--  1 root   root    524 Aug  5 04:48 docker-compose-tomcat.yml
+      drwxr-xr-x  6 root   root   4096 Aug  5 15:42 Docker-Httpd-Tomcat/
+      drwxr-xr-x  8 root   root   4096 Aug  5 06:14 docker-httpd-tomcat-cluster/
+      drwxr-xr-x  7 root   root   4096 Aug  5 05:27 .git/
+      drwxr-xr-x  4 root   root   4096 Aug  5 07:18 .m2/
+      -rw-r--r--  1 root   root    161 Jul  9  2019 .profile
+      -rw-r--r--  1 root   root   8618 Aug  6 02:11 ROOT.war
+      -rw-rw-r--  1 master master 8618 Aug  5 04:58 SampleWebApp.war
+      drwx------  3 root   root   4096 Aug  5 00:42 snap/
+      drwxr-xr-x  6 root   root   4096 Aug  5 07:12 spring-framework-petclinic/
+      drwxr-xr-x  9 root   root   4096 Aug  5 07:28 spring-petclinic/
+      drwxr-xr-x  9 root   root   4096 Aug  5 07:59 spring-petclinic-docker/
+      drwx------  2 root   root   4096 Aug  5 00:42 .ssh/
+      -rw-r--r--  1 root   root    146 Aug  5 07:28 .testcontainers.properties
+      -rw-------  1 root   root   2256 Aug  5 07:31 .viminfo
+      root@kpismain:~# docker cp ROOT.war tomcat-test:/usr/local/tomcat/webapps/
+      Successfully copied 10.2kB to tomcat-test:/usr/local/tomcat/webapps/
+      root@kpismain:~# docker exec -it tomcat-test /bin/bash
+      root@dff4f7d1b468:/usr/local/tomcat# ll
+      total 172
+      drwxr-xr-x 1 root root  4096 Jul 25 23:19 ./
+      drwxr-xr-x 1 root root  4096 Jul 25 23:15 ../
+      drwxr-xr-x 2 root root  4096 Jul 25 23:19 bin/
+      -rw-r--r-- 1 root root 19992 Jul  6 14:43 BUILDING.txt
+      drwxr-xr-x 1 root root  4096 Aug  6 02:02 conf/
+      -rw-r--r-- 1 root root  6210 Jul  6 14:43 CONTRIBUTING.md
+      drwxr-xr-x 2 root root  4096 Jul 25 23:19 lib/
+      -rw-r--r-- 1 root root 57011 Jul  6 14:43 LICENSE
+      drwxrwxrwt 1 root root  4096 Aug  6 02:02 logs/
+      drwxr-xr-x 2 root root  4096 Jul 25 23:19 native-jni-lib/
+      -rw-r--r-- 1 root root  1726 Jul  6 14:43 NOTICE
+      -rw-r--r-- 1 root root  3398 Jul  6 14:43 README.md
+      -rw-r--r-- 1 root root  7139 Jul  6 14:43 RELEASE-NOTES
+      -rw-r--r-- 1 root root 16505 Jul  6 14:43 RUNNING.txt
+      drwxrwxrwt 2 root root  4096 Jul 25 23:19 temp/
+      drwxr-xr-x 1 root root  4096 Aug  6 02:11 webapps/
+      drwxr-xr-x 7 root root  4096 Jul  6 14:43 webapps.dist/
+      drwxrwxrwt 1 root root  4096 Aug  6 02:10 work/
+      root@dff4f7d1b468:/usr/local/tomcat# cd webapps
+      root@dff4f7d1b468:/usr/local/tomcat/webapps# ll
+      total 44
+      drwxr-xr-x 1 root root 4096 Aug  6 02:11 ./
+      drwxr-xr-x 1 root root 4096 Jul 25 23:19 ../
+      drwxr-x--- 4 root root 4096 Aug  6 02:11 ROOT/
+      -rw-r--r-- 1 root root 8618 Aug  6 02:11 ROOT.war
+      drwxr-x--- 4 root root 4096 Aug  6 02:10 SampleWebApp/
+      -rw-rw-r-- 1 1000 1000 8618 Aug  5 04:58 SampleWebApp.war
+      root@dff4f7d1b468:/usr/local/tomcat/webapps# exit
+      exit
+      root@kpismain:~# curl http://localhost:8080
+      <!DOCTYPE html>
+      <!--
+      To change this license header, choose License Headers in Project Properties.
+      To change this template file, choose Tools | Templates
+      and open the template in the editor.
+      -->
+      <html>
+          <head>
+              <title>SampleWebApp</title>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body>
+              <h2>Sample Web Application To Deploy and Test</h2>
+              <br>
+          <div> click <a href="SnoopServlet">Click to Invoke a SnoopServlet</a></div>
+          <br>
+          <br>
+      
+      
+          </body>
+      </html>
+      root@kpismain:~#
 
     
