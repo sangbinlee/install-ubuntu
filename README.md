@@ -1525,4 +1525,10 @@
       </html>
       root@kpismain:~#
 
-    
+# aws eks 환경에서 개발 배포 방식
+    1. 그래들 프로젝트 개발
+    2. 그래들 프로젝트 build jar
+    3. docker build 
+    4. aws ecr login
+    5. docker push <--------------- 여기까지가 개발자가 처리함
+    6. argocd 배포 <---------------- aws 운영자에게 개발자가 배포 요청 함
