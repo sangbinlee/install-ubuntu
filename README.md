@@ -1380,7 +1380,13 @@
 
 
 
-
+# tomcat 8 컨테이너 구동
+    docker run -d --name="tomcat-test" -p 8080:8080 tomcat:8
+  
+    root@kpismain:~# docker ps
+    CONTAINER ID   IMAGE      COMMAND             CREATED              STATUS              PORTS                                       NAMES
+    dff4f7d1b468   tomcat:8   "catalina.sh run"   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp   tomcat-test
+    root@kpismain:~#
 
 
     
