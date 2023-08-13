@@ -1549,3 +1549,21 @@
     systemctl status mssql-server --no-pager
     
     1443 open firewall
+
+
+
+
+# docker tomcat 8 : war 배포
+  docker run -d --name="tomcat-test" -p 8080:8080 tomcat:8
+  docker cp ~/ROOT.war tomcat-test:/usr/local/tomcat/webapps/
+  docker exec -it tomcat-test /bin/bash
+
+   49  export JAVA_OPTS="$JAVA_OPTS -Dsystem.mode=dev"
+   50  export JAVA_OPTS="$JAVA_OPTS -Dlog.location=/usr/local/tomcat/logs/part-zone"
+
+  
+  curl http://localhost:8080
+
+  root@dff4f7d1b468:/usr/local/tomcat/logs# cat catalina.2023-08-13.log
+
+
