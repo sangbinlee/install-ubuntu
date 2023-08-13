@@ -1583,3 +1583,8 @@
           - /root/ROOT.war:/usr/local/tomcat/webapps/ROOT.war
         ports:
           - "8080:8080"
+
+
+# $ docker-compose up -d
+
+# $ docker-compose logs -f
