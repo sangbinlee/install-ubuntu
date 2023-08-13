@@ -1573,8 +1573,8 @@
     version: '3.4'
     
     services:
-      서비스명:
-        container_name: tomcat-test
+      tomcat:
+        container_name: "tomcat-test"
         image: tomcat:8
         environment: # 환경 변수 값
           - system.mode=dev
