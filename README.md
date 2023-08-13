@@ -1586,5 +1586,6 @@
 
 
 # $ docker-compose up -d
+# $ docker-compose down
 
 # $ docker-compose logs -f
