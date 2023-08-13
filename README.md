@@ -1567,3 +1567,19 @@
     root@dff4f7d1b468:/usr/local/tomcat/logs# cat catalina.2023-08-13.log
 
 
+# Docker-compose.yml
+    vi Docker-compose.yml
+    
+    version: '3.4'
+    
+    services:
+      서비스명:
+        container_name: tomcat-test
+        image: tomcat:8
+        environment: # 환경 변수 값
+          - system.mode=dev
+          - log.location=/usr/local/tomcat/logs/part-zone
+        volumes: # 볼륨 마운트
+          - /root/ROOT.war:/usr/local/tomcat/webapps/ROOT.war
+        ports:
+          - "8080:8080"
