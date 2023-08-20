@@ -1585,7 +1585,38 @@
           - "8080:8080"
 
 
+
+
+
+
+
 # $ docker-compose up -d
+
+
+
+
+
+
+
+
+
 # $ docker-compose down
+
+    
+    root@kpismain:~# cp  /home/master/ROOT.war .
+    root@kpismain:~# docker compose down
+    [+] Running 2/2
+     ✔ Container tomcat-85   Removed                                                                                                                                                                          9.2s
+     ✔ Network root_default  Removed                                                                                                                                                                          0.4s
+    root@kpismain:~# docker compose up -d
+    WARN[0000] Found orphan containers ([tomcat-test]) for this project. If you removed or renamed this service in your compose file, you can run this command with the --remove-orphans flag to clean it up.
+    [+] Running 2/2
+     ✔ Network root_default  Created                                                                                                                                                                          0.1s
+     ✔ Container tomcat-85   Started                                                                                                                                                                          0.3s
+    root@kpismain:~#
+
+
+# $ docker-compose up -d
+
 
 # $ docker-compose logs -f
