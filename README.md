@@ -1,3 +1,26 @@
+
+# local ssh 
+	sudo service ssh start
+  
+  
+  이제 Linux용 Windows 하위 시스템을 Microsoft Store에서 사용할 수 있습니다.
+  'wsl.exe --update'를 실행하거나 https://aka.ms/wslstorepage를 방문하여 업그레이드할 수 있습니다.
+  Microsoft Store의 WSL을 설치하면 최신 WSL 업데이트가 더 빠르게 제공됩니다.
+  자세한 내용은 https://aka.ms/wslstoreinfo를 방문하세요.
+  
+  Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 4.4.0-22621-Microsoft x86_64)
+  
+   * Documentation:  https://help.ubuntu.com
+   * Management:     https://landscape.canonical.com
+   * Support:        https://ubuntu.com/advantage
+  
+  
+  This message is shown once a day. To disable it please create the
+  /home/sangbinlee9/.hushlogin file.
+  sangbinlee9@DESKTOP-EE56G2V:~$
+
+
+
 # download ubuntu server iso file
   
     https://ubuntu.com/download/server
