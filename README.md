@@ -1643,3 +1643,33 @@
 
 
 # $ docker-compose logs -f
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# docker-compose rm
+
+# 서비스 시작
+docker-compose start
+
+# 서비스 정지
+docker-compose stop
+
+# 서비스 일시 정지
+docker-compose pause
+
+# 서비스 일시 정지 해제
+docker-compose unpause
+
+# 서비스 재시작
+docker-compose restart
